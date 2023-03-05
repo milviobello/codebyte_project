@@ -16,9 +16,16 @@ const getAllRecords = async (req, res) => {
 const getPatientRecord = async (req, res) => {
   // destructuring: req.params.PATIENT_ID
   const { PATIENT_ID } = req.params
-  // console.log(req.params)
+  console.log(req.params)
 
-  const patientRecord = await Patient.findOne({PATIENT_ID: PATIENT_ID}).select('PATIENT_ID LATEST_BMI AGE SEX ZIP')
+  // These are all the fields that will be returned in the query.
+  // The fields are separated by spaces. 
+  const fieldsToSelect = 'patientId age sex zip latestBmi latestWeight \
+  pngFileName examId icuAdmit numIcuAdmissions mortality'
+
+  const patientRecord = await Patient
+    .findOne({PATIENT_ID: PATIENT_ID})
+    .select(fieldsToSelect)
 
   // if patient id does not exist a 404 error will be produced
   if (!patientRecord) {
@@ -26,7 +33,7 @@ const getPatientRecord = async (req, res) => {
   }
 
   res.status(200).json(patientRecord)
-  console.log(patientRecord);
+  // console.log(patientRecord);
 }
 
 // create a new patient record
@@ -49,6 +56,7 @@ const createPatientRecord = async (req, res) => {
 const deletePatientRecord = async (req, res) => {
   // this gets the `req` parameter above
   const { id } = req.params
+  console.log(req.params)
 
   // check if the input ID value is valid
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -56,6 +64,7 @@ const deletePatientRecord = async (req, res) => {
   }
 
   const patientRecord = await Patient.findOneAndDelete({_id: id})
+  console.log(patientRecord)
 
   // if patient id does not exist a 404 error will be produced
   if (!patientRecord) {
