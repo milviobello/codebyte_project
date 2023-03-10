@@ -4,8 +4,11 @@ const mongoose = require('mongoose')
 // get all patient records in the database
 const getAllRecords = async (req, res) => {
   try {
-    const patients = await Patient.find({}).sort({ createdAt: -1 })
-    res.status(200).json(patients)
+    const patients = await Patient.find().sort({ createdAt: -1 })
+    res.status(200).json({
+      "success": true,
+      "exams": patients
+    })
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
