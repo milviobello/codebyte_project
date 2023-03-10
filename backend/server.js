@@ -13,10 +13,11 @@ const app = express()
 
 // middleware
 app.use(express.json()) // Allows access to req.body within the varias requests.
-const cors = require('cors');
+
 app.use(cors({
     origin: 'http://localhost:3000'
 }));
+
 app.use((req, res, next) => {
   console.log(req.path, req.method)
   next()
