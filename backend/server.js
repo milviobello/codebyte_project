@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const moongose = require('mongoose')
 const patientRoutes = require('./routes/patient_record')
+const cors = require('cors');
 
 //mongoose.set('strictQuery', false);
 
