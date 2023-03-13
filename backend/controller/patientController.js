@@ -23,7 +23,7 @@ const getPatientRecord = async (req, res) => {
   // These are all the fields that will be returned in the query.
   // The fields are separated by spaces. 
   const fieldsToSelect = 'patientId age sex zip latestBmi latestWeight \
-  pngFileName examId icuAdmit numIcuAdmissions mortality'
+  pngFileName examId icuAdmit numIcuAdmissions mortality brixiaScore'
 
   const patientRecord = await Patient.find({patientId: patientId})
 

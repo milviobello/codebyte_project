@@ -42,6 +42,9 @@ const patientRecord = new Schema({
   },
   mortality: {
     type: String
+  },
+  brixiaScore: {
+    type: String
   }
 
 }, { timestamps: true }) // creates a time stamp for when the request was made.
