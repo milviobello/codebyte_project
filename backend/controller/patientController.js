@@ -38,6 +38,30 @@ const getPatientRecord = async (req, res) => {
   })
 }
 
+// get a single patient record
+const getPatientRecordById = async (req, res) => {
+  // destructuring: req.params.PATIENT_ID
+  const { _id } = req.params
+  // console.log(req.params)
+
+  // These are all the fields that will be returned in the query.
+  // The fields are separated by spaces. 
+  const fieldsToSelect = 'patientId age sex zip latestBmi latestWeight \
+  pngFileName examId icuAdmit numIcuAdmissions mortality brixiaScore'
+
+  const patientRecord = await Patient.findById({_id: _id})
+
+  // if patient id does not exist a 404 error will be produced
+  if (patientRecord == null) {
+    return res.status(404).json({ error: "Invalid patient ID" })
+  }
+
+  res.status(200).json({
+    "success": true,
+    "exams": patientRecord
+  })
+}
+
 // create a new patient record
 // add new patient record to the database
 const createPatientRecord = async (req, res) => {
@@ -99,6 +123,7 @@ const updatePatientRecord = async (req, res) => {
 module.exports = {
   getAllRecords,
   getPatientRecord,
+  getPatientRecordById,
   createPatientRecord,
   deletePatientRecord,
   updatePatientRecord
