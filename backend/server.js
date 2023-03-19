@@ -14,7 +14,7 @@ const app = express()
 // middleware
 app.use(express.json()) // Allows access to req.body within the varias requests.
 
-const allowedDomains = ['https://codebyte-finalpresentation.onrender.com/', 'http://localhost:3000', "https://codebyte-presentation.onrender.com"];
+const allowedDomains = ['https://codebyte-finalpresentation.onrender.com/', 'http://localhost:3000', "https://codebyte-presentation.onrender.com", "https://codebyte-finalpresentation.onrender.com"];
 
 app.use(cors({
   origin: function (origin, callback) {
